@@ -1,5 +1,6 @@
 
 replace prin_e_16_18e ="1" if prin_e_16_18e=="a"
+replace prin_e_16_18e =""  if prin_e_16_18e==""
 replace prin_e_16_18e ="2" if prin_e_16_18e=="b"
 replace prin_e_16_18e ="3" if prin_e_16_18e=="c"
 replace prin_e_16_18e ="4" if prin_e_16_18e=="d"
