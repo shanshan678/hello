@@ -1,9 +1,10 @@
 capture clear
 set		more off
-global	dtadir	"E:\刘山山\校企合作\校企合作数据清理\Final Version of Survey Forms"
+global	dtadir	"D:\VET\河南中职\Data\河南中职2016年调查\原始数据\"					//Hongmei's directory
+*global	dtadir	"E:\刘山山\校企合作\校企合作数据清理\Final Version of Survey Forms" 	//Shanshan's directory
 
 ***************Part I:   给变量重命名*********************************
-import	excel		using "E:\刘山山\校企合作\校企合作数据清理\Final Version of Survey Forms\学校基本情况表(103).xlsx",clear firstrow   //从excel导入到stata中
+import	excel		using "$dtadir\学校基本情况表(103).xlsx",clear firstrow   //从excel导入到stata中
 rename	调查员编码	prin_e_16_surveyer_code
 rename	问卷编码	prin_e_16_paper_code
 rename	学校全称	prin_e_16_sch
@@ -401,6 +402,12 @@ generate prin_e_16_9_1_12 = regexm(prin_e_16_9_1_new, "c")
 
 drop prin_e_16_9_1_new //删除新生成的中介变量
 order prin_e_16_9_1 prin_e_16_9_1_*,a(prin_e_16_8_1) //把新生成的最终变量放在原变量prin_e_16_9_1后面，方便检查新生成的变量
+sum 	prin_e_16_9_1 prin_e_16_9_1_*
+foreach var of varlist prin_e_16_9_1_* {
+	replace	`var' = . if prin_e_16_9_1 == ""
+	}																			//ditto
+label	var	prin_e_16_9_1_1 "考评的主要内容是生均支出，是=1"					//ditto
+
 
 
 ******第2个多选题prin_e_16_9_2
@@ -535,6 +542,8 @@ gen prin_e_16_12_l =regexm(prin_e_16_12,"l")
 gen prin_e_16_12_m =regexm(prin_e_16_12,"m")
 
 order prin_e_16_12 prin_e_16_12_*,a(prin_e_16_11_13detail) //把新生成的最终变量放在原变量后面，方便检查新生成的变量
+sum		prin_e_16_12 prin_e_16_12_*
+
 
 ******第8个多选题prin_e_16_13c
 gen prin_e_16_13c_a =regexm(prin_e_16_13c,"a") //生成新的最终变量
@@ -1097,7 +1106,7 @@ prin_e_16_34_1_na prin_e_16_34_1_nb prin_e_16_34_1_nc prin_e_16_34_2_na prin_e_1
 replace prin_e_16_8_3="" if prin_e_16_8_3=="不清楚"  //把选项中的“不清楚”替换成空值
 
 destring prin_e_16_8_1 prin_e_16_8_2 prin_e_16_8_3 prin_e_16_8_4 prin_e_16_8_5 prin_e_16_8_6 , replace 
-label define C 1 "每年2次一上"  2 "每年2次" 3 "每年1次" 4 "每年不到1次"
+label define C 1 "每年2次以上"  2 "每年2次" 3 "每年1次" 4 "每年不到1次"
 label values prin_e_16_8_1 prin_e_16_8_2 prin_e_16_8_3 prin_e_16_8_4 prin_e_16_8_5 prin_e_16_8_6  C
 
 destring prin_e_16_10,replace
@@ -1277,13 +1286,23 @@ replace prin_e_16_31_2_b = "" if prin_e_16_31_2_b == "不清楚"
 replace prin_e_16_31_2_c = "" if prin_e_16_31_2_c == "无"
 replace prin_e_16_31_2_c = "" if prin_e_16_31_2_c == "不清楚"
 
-destring	prin_e_16_31_1_a,	replace
-destring	prin_e_16_31_1_b,	replace
-destring	prin_e_16_31_1_c,	replace
-destring	prin_e_16_31_2_a,	replace
-destring	prin_e_16_31_2_b,	replace
-destring	prin_e_16_31_2_c,	replace
+///Section: 校企合作
+drop	prin_e_16_30_1_a prin_e_16_30_2_a prin_e_16_30_1_b prin_e_16_30_2_b prin_e_16_30_1_c prin_e_16_30_2_c
 
+
+
+//merge with 企业信息
+gen 	schid = 	prin_e_16_paper_code
+sort	schid 
+merge 	1:1 schid using ""
+tab 	_merge
+
+foreach var of varlist ... {
+	replace `var' = . if nocoop_comp == 0
+	}
+foreach var of varlist ... {
+	replace `var' = . if nocoop_shukong == 0
+	}
 
 
 
