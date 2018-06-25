@@ -1,0 +1,943 @@
+capture clear
+set	more off
+global	dtadir	"E:\shanshan\学生表" 	
+import	excel using "$dtadir\计算机(2326).xlsx",clear firstrow 
+save   "$dtadir\Henan_VET_2016_stu_comp_raw.dta",replace
+import	excel using "$dtadir\数控(1357).xlsx",clear firstrow 
+save   "$dtadir\Henan_VET_2016_stu_shukong_raw.dta",replace
+
+//变量命名-计算机
+use "$dtadir\Henan_VET_2016_stu_comp_raw.dta",clear
+rename	调查员编码	Stu_e_16_surveyercode
+rename	问卷编码	Stu_e_16_stuid
+rename	学校名称	Stu_e_16_schname
+rename	姓名	Stu_e_16_stuname
+rename	性别	Stu_e_16_gender
+rename	生日_年	Stu_e_16_biry
+rename	生日_月	Stu_e_16_birm
+rename	上学期专业名称	Stu_e_16_lastmajorname
+rename	上学期所在班级_年	Stu_e_16_lastclassyear
+rename	上学期所在班级_班	Stu_e_16_lastclass
+rename	上学期班主任姓名	Stu_e_16_lastheadteacher
+rename	本学期班级_年	Stu_e_16_classyear
+rename	本学期班级_班	Stu_e_16_class
+rename	填表日期	Stu_e_16_surveydate 
+rename	你的手机号码是多少	Stu_e_16_1
+rename	你妈妈的手机号码是多少	Stu_e_16_2
+rename	你爸爸的手机号码是多少	Stu_e_16_3
+rename	您的微信号码是多少	Stu_e_16_4
+rename	你的QQ号码	Stu_e_16_5
+rename	你是否加入了你班级的QQ群1是2否3本班没有Q	Stu_e_16_6
+rename	你家的电话号码是多少	Stu_e_16_7
+rename	跟去年5月相比你感觉你现在的数学能力怎么样1比以前好	Stu_e_16_8
+rename	跟去年5月相比你感觉你现在的专业能力怎么样1比以前好	Stu_e_16_9
+rename	整体来说你对于你在中职学习的成绩满意吗1非常满意2	Stu_e_16_10
+rename	a请写出目前你在本班的朋友的名字_1	Stu_e_16_11_a
+rename	b请写出目前你在本班的朋友的名字_2	Stu_e_16_11_b
+rename	c请写出目前你在本班的朋友的名字_3	Stu_e_16_11_c
+rename	d请写出目前你在本班的朋友的名字_4	Stu_e_16_11_d
+rename	e请写出目前你在本班的朋友的名字_5	Stu_e_16_11_e
+rename	f请写出目前你在本班的朋友的名字_6	Stu_e_16_11_f
+rename	上学期你班是否有同学考试作弊1是2否	Stu_e_16_12
+rename	上周你班是否有同学和老师顶嘴1是2否	Stu_e_16_13
+rename	上周你班是否有同学在学校喝酒1是2否	Stu_e_16_14
+rename	上周你班是否有同学在学校抽烟1是2否	Stu_e_16_15
+rename	上周你班是否有同学逃课1是2否	Stu_e_16_16
+rename	上周你班是否有同学抄作业1是2否	Stu_e_16_17
+rename	上周你班是否有同学在学校打架1是2否	Stu_e_16_18
+rename	上周你班是否有同学勒索别人1是2否	Stu_e_16_19
+rename	上周你班是否有同学欺负同学1是2否	Stu_e_16_20
+rename	上周你班是否有同学在学校赌钱1是2否	Stu_e_16_21
+rename	上周你在学校抽了几次烟1从不3天2少	Stu_e_16_22
+rename	上周你在学校喝了几次酒1从不3天2少	Stu_e_16_23
+rename	你学校是不是封闭式管理1是2否	Stu_e_16_24
+rename	上周学校封闭期间你出了几次校门	Stu_e_16_25
+rename	上周你每天大概有多少时间在用电脑或者玩手机	Stu_e_16_26
+rename	其中上周你每天用电脑或手机娱乐例如玩游戏上微信看	Stu_e_16_27
+rename	上周你的老师有几次提醒你要控制用电脑或手机的时间	Stu_e_16_28
+rename	你学校是否有心理辅导老师1有2没有	Stu_e_16_29
+rename	你班是否有同学接受过心理辅导老师的咨询或辅导1有	Stu_e_16_30
+rename	你是否参加过职业技能大赛的备赛训练活动1是2否	Stu_e_16_31
+rename	你是否参加过职业技能大赛1是2否	Stu_e_16_32
+rename	A上课的时间	Stu_e_16_33_a
+rename	b课后学习和做家庭作业的时间	Stu_e_16_33_b
+rename	c睡眠时间	Stu_e_16_33_c
+rename	d其他如运动聚命	Stu_e_16_33_d
+rename	e无所事事地玩	Stu_e_16_33_e
+rename	上学期你的老师找你个人聊天有几次	Stu_e_16_34
+rename	你觉得你的老师关心你吗1很关心2关心3不关心	Stu_e_16_35
+rename	你的手机上存有你老师的电话号码吗1存了2没存	Stu_e_16_36
+rename	你如果在实习中遇到困难你觉得你会主动与你的老师联系吗	Stu_e_16_37
+rename	学校的老师或领导曾经跟你们班上同学讲过继续上学的重要性吗	Stu_e_16_38
+rename	学校的老师或领导曾经跟你本人讲过继续上学的重要性吗1	Stu_e_16_39
+rename	最近一学年你们班上有同学退学或者不读了吗1有2	Stu_e_16_40
+rename	你们班主任老师会努力劝说这些退学或要退学的同学继续上学吗	Stu_e_16_41
+rename	你从中职毕业后你估计你第一个月的薪水会是多少钱	Stu_e_16_42
+rename	假设你本死中职没毕业就出去工作你估计你班上同学中职毕业那	Stu_e_16_43
+rename	你估计河南其他和你同一年级的中职学生毕业后第一个月的薪水	Stu_e_16_44
+rename	假设河南其他和你同一年级的中职学生没毕业就出去工作待到同	Stu_e_16_45
+rename	如果你从中职毕业了你估计2026年10年后你一个月的	Stu_e_16_46
+rename	如果你没有从中职毕业你估计2026年10年后你一个月	Stu_e_16_47
+rename	你从中职毕业后你认为你在3个月之内能有多大的几率找到一份	Stu_e_16_48
+rename	你从中职毕业后你认为你在3个月之内能有多大的几率找到任何	Stu_e_16_49
+rename	假设你本人中职没毕业就去找工作待到你班上同学中职毕业那年	Stu_e_16_50
+rename	你是否打算从这所中职毕业1是2否	Stu_e_16_51
+rename	你离开中职之后的第一年打算干什么1找工作2上大专	Stu_e_16_52
+rename	你希望自己将来最高能够达到什么样的教育程度1初中毕业	Stu_e_16_53
+rename	你是否准备参加普通高考1是2否	Stu_e_16_54
+rename	你是否准备参加对口高考1是2否	Stu_e_16_55
+rename	你是否打算上高职高专1是12否	Stu_e_16_56
+rename	你父亲希望你达到的教育程度1初中毕业2高中毕业3	Stu_e_16_57
+rename	你母亲希望你达到的教育程度1初中韦业2高中毕业3	Stu_e_16_58
+rename	新的计划和想法有時候会让我无法专心于现有的计划1一点	Stu_e_16_59
+rename	挫折不会使我气馁1一点也不像2不像3有点像4	Stu_e_16_60
+rename	当我着迷在某件计划一阵子后会失去兴趣1一点也不像2	Stu_e_16_61
+rename	我是一个努力工作的人1一点也不像2不像3有点	Stu_e_16_62
+rename	我时常立下一个目标但一阵子过后又改追求別的目标1	Stu_e_16_63
+rename	我很难把我的注意力集中在一个要好几个月才能完成的计划上	Stu_e_16_64
+rename	无论什么事情我开了头就要完成它1一点也不像2不像	Stu_e_16_65
+rename	我很勤劳我不轻言放弃1一点也不像2不像3有	Stu_e_16_66
+rename	从2015年5月到现在你是否参加过任何实习1是2	Stu_e_16_67
+rename	你实习的单位在哪里1本县12本市非本县3本省	Stu_e_16_68
+rename	你主要通过什么渠道联系实习单位1本校安排2本人自	Stu_e_16_69
+rename	a其他说明	Stu_e_16_69detail
+rename	你实习单位的名称是什么1富士康2宇通客车3	Stu_e_16_70
+rename	CQ	Stu_e_16_70detail
+rename	实习单位在接受你实习前是否要求你出示学校同意文件或其他同	Stu_e_16_71
+rename	你是几年级开始实习的1你入学后第一学期2第一学期	Stu_e_16_72
+rename	你班级有几个人和你一起去这个实习单位	Stu_e_16_73
+rename	你所在的实习单位有多少员工	Stu_e_16_74
+rename	在前往实习之前是否有学校教师跟你说明实习的目的和内容	Stu_e_16_75
+rename	实习单位学校你本人是否签有三方协议1是2否	Stu_e_16_76
+rename	你手里是否保存有实习协议正本1是2否	Stu_e_16_77
+rename	实习期间学校或企业是否为你购买了意外伤害保险1是	Stu_e_16_78
+rename	你跟哪些部门缴纳了实习费1都没有2学校3实习	Stu_e_16_79
+rename	DA	Stu_e_16_79detail
+rename	你一共缴纳了多少实习费	Stu_e_16_80
+rename	进单位时你是否接受了关于实习要求与单位制度的培训1	Stu_e_16_81
+rename	你在实习期间所在的岗位是否与你在学校所学的专业对口	Stu_e_16_82
+rename	你主要是通过什么形式参与实习1学徒式2加工流水	Stu_e_16_83
+rename	DF	Stu_e_16_83detail
+rename	你在实习单位一共实习了几个星期	Stu_e_16_84
+rename	实习期间你一周工作几天	Stu_e_16_85
+rename	实习期间你平均一天工作几个小时	Stu_e_16_86
+rename	实习期间你是否曾一周工作超过40个小时1从来没有	Stu_e_16_87
+rename	实习期间你是否曾一天工作超过8小时1从来没有2	Stu_e_16_88
+rename	你在实习期间一共有多少工资	Stu_e_16_89
+rename	跟其他千一样工作的正式员工相比你的工资如何1较高	Stu_e_16_90
+rename	实习工资如何发给你1企业直接发给学生i2通过学校	Stu_e_16_91
+rename	DO	Stu_e_16_91detail
+rename	实习期间学校老师在实习单位驻场指导了几个星期	Stu_e_16_92
+rename	实习期间学校老师总共有几次询问过你实习的情况	Stu_e_16_93
+rename	实习期间学校老师是否与你的家长沟通过你实习的情况1	Stu_e_16_94
+rename	实习期间实习单位总共有几次安排培训活动给实习生	Stu_e_16_95
+rename	你会推荐跟你同专业的同学去你的实习单位进行实习吗1	Stu_e_16_96
+rename	老师很关注我的学习1每节课2大部分课3个别课	Stu_e_16_97
+rename	当我需要帮助时老师总是会给我一些额外的帮助1每节	Stu_e_16_98
+rename	老师总是在学习方面帮助我1每节课2大部分课3	Stu_e_16_99
+rename	老师会一直给我讲解直到我明白课堂内容1每节课2	Stu_e_16_100
+rename	老师在课堂上会给我表达观点的机会1每节课2大部	Stu_e_16_101
+rename	老师给我们制定了明确的学习目标1每节课2大部分课	Stu_e_16_102
+rename	老师会让我或者其他同学有充足的时间来表达我们的想法和思路	Stu_e_16_103
+rename	老师会依据同学们学习能力的高低布置不同的作业1每节	Stu_e_16_104
+rename	老师会布置需要至少一周才能完成的大作业1每节课2	Stu_e_16_105
+rename	老师会让我知道我在课上的学习情况1每节课2大部分	Stu_e_16_106
+rename	老师会提问我们以确认我们是否听懂了他她讲的内容	Stu_e_16_107
+rename	老师会让我们分成小组一起解题或完成一些任务1每节	Stu_e_16_108
+rename	在开始讲解一堂课的新内容之前老师会回顾上一堂课讲的内	Stu_e_16_109
+rename	老师会让我们帮他她设计课堂上的活动或内容1每	Stu_e_16_110
+rename	老师会让我知道我在数学方面的强项和弱项分别是什么1	Stu_e_16_111
+rename	每当有考试或作业时老师会告诉我们他她对我们的期望	Stu_e_16_112
+rename	老师会告诉我们必须要掌握哪些东西1每节课2大部	Stu_e_16_113
+rename	老师会告诉我如何才能提高我的数学能力1每节课2	Stu_e_16_114
+rename	老师会给我们布置数学练习题1每节课2大部分课	Stu_e_16_115
+rename	我们老师能够让同学们都集中注意力认真听讲1非常同	Stu_e_16_116
+rename	我们老师能够保持课堂井然有序1非常同意2同意	Stu_e_16_117
+rename	我们老师能够按时开始上课1非常同意2同意3	Stu_e_16_118
+rename	我们老师等了很久同学们才开始安静下来听讲1非常	Stu_e_16_119
+rename	在实际操作训练实训中我能够独立完成老师安排的实训任	Stu_e_16_120
+rename	在实训中我能在限定的时间内完成任务1非常符合2	Stu_e_16_121
+rename	在实际操作测试中老师对我的评价比较高1非常符合2	Stu_e_16_122
+rename	在实际操作中遇到问题我能够自行解决1非常符合2	Stu_e_16_123
+rename	我的动手能力比以前有了很大的进步1非常符合2比较	Stu_e_16_124
+rename	我能够根据老师的示例完成一个新的任务1非常符合2	Stu_e_16_125
+rename	我能把老师所教的知识运用在实际操作中1非常符合2	Stu_e_16_126
+rename	我能较好地完成老师布置的实践任务1非常符合2比较	Stu_e_16_127
+rename	我能灵活应变适应不同的环境或胜任不同的工作1非常符	Stu_e_16_128
+rename	这学期老师曾经就你的学习进度跟你单独谈话1一周	Stu_e_16_129
+rename	这学期老师曾经就你的学习进度跟你家长单独谈话1	Stu_e_16_130
+rename	这学期老师曾经就你的学习进度给家里发家长信1一	Stu_e_16_131
+rename	这学期老师曾经告诉你考好很重要1一周一次或更多	Stu_e_16_132
+rename	上周你是否上过数学课1上过2没上过	Stu_e_16_133
+rename	上周数学老师布置了几次数学作业	Stu_e_16_134
+rename	上周你交了几次数学作业	Stu_e_16_135
+rename	上周你完成数学课的作业平均每天花了多少时间0老师	Stu_e_16_136
+rename	上周数学老师批改了几次你交的数学作业	Stu_e_16_137
+rename	上周数学老师在课堂上提问过你几次	Stu_e_16_138
+rename	上周数学老师给你单独辅导几次	Stu_e_16_139
+rename	上周除了数学老师你接受几次数学辅导次	Stu_e_16_140
+rename	上周你缺过几节数学课0没缺过1节2两节3	Stu_e_16_141
+rename	上周专业课老师布置了几次专业课的作业	Stu_e_16_142
+rename	上周你交了几次专业课作业	Stu_e_16_143
+rename	上周你完成专业课的作业平均每天花了多少时间0老师	Stu_e_16_144
+rename	上周专业课老师批改了几次你交的专业课作业	Stu_e_16_145
+rename	上周专业课老师在课堂上提问过你几次	Stu_e_16_146
+rename	上周专业课老师给你单独辅导几次	Stu_e_16_147
+rename	上周除了专业课老师你接受几次专业辅导次	Stu_e_16_148
+rename	上周你缺过几节专业课0没缺过1一节2两节	Stu_e_16_149
+rename	父亲督促你学习功课1经常2有时3很少4几	Stu_e_16_150
+rename	母亲督促你学习功课1经常2有时3很少4几	Stu_e_16_151
+rename	父亲指导你制定学业计划1经常2有时3很少4	Stu_e_16_152
+rename	母亲指导你制定学业计划1经常2有时3很少4	Stu_e_16_153
+rename	父亲与你交流未来发展规划1经常2有时3很少	Stu_e_16_154
+rename	母亲与你交流未来发展规划1经常2有时3很少	Stu_e_16_155
+rename	父亲关心你的学校生活情况1经常2有时3很少	Stu_e_16_156
+rename	母亲关心你的学校生活情况1经常2有时3很少	Stu_e_16_157
+rename	父亲与你交流学习的事情1经常2有时3很少4	Stu_e_16_158
+rename	母亲与你交流学习的事情1经常2有时3很少4	Stu_e_16_159
+rename	与父亲交流过程你感觉很偷快1经常2有时3很	Stu_e_16_160
+rename	与母亲交流过程你感觉很愉快1经常2有时3很	Stu_e_16_161
+rename	GH	stu_e_16_ctest_g2_stuid
+rename	GI	stu_e_16_ctest_g2_schname
+rename	班级_年	stu_e_16_ctest_g2_classyear
+rename	班级_班	stu_e_16_ctest_g2_class
+rename	专业名称	stu_e_16_ctest_g2_majorname 
+rename	GM	stu_e_16_ctest_g2_stuname
+rename	GN	stu_e_16_ctest_g2_surveydate
+rename	GO	stu_e_16_ctest_g2_1
+rename	GP	stu_e_16_ctest_g2_2
+rename	GQ	stu_e_16_ctest_g2_3
+rename	GR	stu_e_16_ctest_g2_4
+rename	GS	stu_e_16_ctest_g2_5
+rename	GT	stu_e_16_ctest_g2_6
+rename	GU	stu_e_16_ctest_g2_7
+rename	GV	stu_e_16_ctest_g2_8
+rename	GW	stu_e_16_ctest_g2_9
+rename	GX	stu_e_16_ctest_g2_10
+rename	GY	stu_e_16_ctest_g2_11
+rename	GZ	stu_e_16_ctest_g2_12
+rename	HA	stu_e_16_ctest_g2_13
+rename	HB	stu_e_16_ctest_g2_14
+rename	HC	stu_e_16_ctest_g2_15
+rename	HD	stu_e_16_ctest_g2_16
+rename	HE	stu_e_16_ctest_g2_17
+rename	HF	stu_e_16_ctest_g2_18
+rename	HG	stu_e_16_ctest_g2_19
+rename	HH	stu_e_16_ctest_g2_20
+rename	HI	stu_e_16_ctest_g2_21
+rename	HJ	stu_e_16_ctest_g2_22
+rename	HK	stu_e_16_ctest_g2_23
+rename	HL	stu_e_16_ctest_g2_24
+rename	HM	stu_e_16_ctest_g2_25
+rename	HN	stu_e_16_ctest_g2_26
+rename	HO	stu_e_16_ctest_g2_27
+rename	HP	stu_e_16_ctest_g2_28
+rename	HQ	stu_e_16_ctest_g2_29
+rename	HR	stu_e_16_ctest_g2_30
+rename	HS	stu_e_16_ctest_g2_31
+rename	HT	stu_e_16_ctest_g2_32
+rename	HU	stu_e_16_ctest_g2_33
+rename	HV	stu_e_16_ctest_g2_34
+rename	HW	stu_e_16_ctest_g2_35
+rename	HX	stu_e_16_ctest_g2_36
+rename	HY	stu_e_16_ctest_g2_37
+rename	HZ	stu_e_16_ctest_g2_38
+rename	IA	stu_e_16_ctest_g2_39
+rename	IB	stu_e_16_ctest_g2_40
+rename	IC	stu_e_16_ctest_g2_41
+rename	ID	stu_e_16_ctest_g2_42
+rename	IE	stu_e_16_ctest_g2_43
+rename	IF	stu_e_16_ctest_g2_44
+rename	IG	stu_e_16_ctest_g2_45
+rename	IH	stu_e_16_ctest_g2_46
+rename	II	stu_e_16_ctest_g2_47
+rename	IJ	stu_e_16_ctest_g2_48
+rename	IK	stu_e_16_ctest_g2_49
+rename	IL	stu_e_16_ctest_g2_50
+rename	IM	stu_e_16_ctest_g2_51
+rename	IN	stu_e_16_ctest_g2_52
+rename	IO	stu_e_16_ctest_g2_53
+rename	IP	stu_e_16_ctest_g2_54
+rename	IQ	stu_e_16_ctest_g2_55
+rename	IR	stu_e_16_ctest_g2_56
+rename	IS	stu_e_16_ctest_g2_57
+rename	_问卷编码	stu_e_16_mtest_g2_stuid
+rename	IU	stu_e_16_mtest_g2_schname
+rename	IV	stu_e_16_mtest_g2_classyear
+rename	IW	stu_e_16_mtest_g2_class
+rename	IX	stu_e_16_mtest_g2_majorname
+rename	IY	stu_e_16_mtest_g2_stuname
+rename	IZ	stu_e_16_mtest_g2_surveydate
+rename	_1	stu_e_16_mtest_g2_1_1
+rename	_2	stu_e_16_mtest_g2_1_2
+rename	_3	stu_e_16_mtest_g2_1_3
+rename	_4	stu_e_16_mtest_g2_1_4
+rename	JE	stu_e_16_mtest_g2_2_1
+rename	JF	stu_e_16_mtest_g2_2_2
+rename	JG	stu_e_16_mtest_g2_3
+rename	JH	stu_e_16_mtest_g2_4
+rename	JI	stu_e_16_mtest_g2_5
+rename	JJ	stu_e_16_mtest_g2_6
+rename	JK	stu_e_16_mtest_g2_7
+rename	JL	stu_e_16_mtest_g2_8
+rename	JM	stu_e_16_mtest_g2_9
+rename	JN	stu_e_16_mtest_g2_10
+rename	JO	stu_e_16_mtest_g2_11
+rename	JP	stu_e_16_mtest_g2_12
+rename	JQ	stu_e_16_mtest_g2_13
+rename	JR	stu_e_16_mtest_g2_14
+rename	JS	stu_e_16_mtest_g2_15
+rename	JT	stu_e_16_mtest_g2_16
+rename	JU	stu_e_16_mtest_g2_17
+rename	JV	stu_e_16_mtest_g2_18
+rename	JW	stu_e_16_mtest_g2_19
+rename	JX	stu_e_16_mtest_g2_20
+rename	JY	stu_e_16_mtest_g2_21
+rename	JZ	stu_e_16_mtest_g2_22
+rename	KA	stu_e_16_mtest_g2_23
+rename	KB	stu_e_16_mtest_g2_24
+rename	KC	stu_e_16_mtest_g2_25
+rename	KD	stu_e_16_mtest_g2_26
+rename	KE	stu_e_16_mtest_g2_27
+rename	KF	stu_e_16_mtest_g2_28
+rename	KG	stu_e_16_mtest_g2_29
+rename	KH	stu_e_16_mtest_g2_30
+rename	KI	stu_e_16_mtest_g2_31
+rename	KJ	stu_e_16_mtest_g2_32
+rename	KK	stu_e_16_mtest_g2_33
+rename	KL	stu_e_16_mtest_g2_34
+rename	KM	stu_e_16_mtest_g2_35
+rename	图像名称	stu_e_16_mtest_g2_image
+
+tostring Stu_e_16_69detail,replace
+save   "$dtadir\Henan_VET_2016_stu_comp_raw.dta",replace
+
+
+//变量命名-数控
+use "$dtadir\Henan_VET_2016_stu_shukong_raw.dta",clear
+rename	调查员编码	Stu_e_16_surveyercode
+rename	问卷编码	Stu_e_16_stuid
+rename	学校名称	Stu_e_16_schname
+rename	姓名	Stu_e_16_stuname
+rename	性别	Stu_e_16_gender
+rename	生日_年	Stu_e_16_biry
+rename	生日_月	Stu_e_16_birm
+rename	上学期专业名称	Stu_e_16_lastmajorname
+rename	上学期所在班级_年	Stu_e_16_lastclassyear
+rename	上学期所在班级_班	Stu_e_16_lastclass
+rename	上学期班主任姓名	Stu_e_16_lastheadteacher
+rename	本学期班级_年	Stu_e_16_classyear
+rename	本学期班级_班	Stu_e_16_class
+rename	填表日期	Stu_e_16_surveydate 
+rename	你的手机号码是多少	Stu_e_16_1
+rename	你妈妈的手机号码是多少	Stu_e_16_2
+rename	你爸爸的手机号码是多少	Stu_e_16_3
+rename	您的微信号码是多少	Stu_e_16_4
+rename	你的QQ号码	Stu_e_16_5
+rename	你是否加入了你班级的QQ群1是2否3本班没有Q	Stu_e_16_6
+rename	你家的电话号码是多少	Stu_e_16_7
+rename	跟去年5月相比你感觉你现在的数学能力怎么样1比以前好	Stu_e_16_8
+rename	跟去年5月相比你感觉你现在的专业能力怎么样1比以前好	Stu_e_16_9
+rename	整体来说你对于你在中职学习的成绩满意吗1非常满意2	Stu_e_16_10
+rename	a请写出目前你在本班的朋友的名字_1	Stu_e_16_11_a
+rename	b请写出目前你在本班的朋友的名字_2	Stu_e_16_11_b
+rename	c请写出目前你在本班的朋友的名字_3	Stu_e_16_11_c
+rename	d请写出目前你在本班的朋友的名字_4	Stu_e_16_11_d
+rename	e请写出目前你在本班的朋友的名字_5	Stu_e_16_11_e
+rename	f请写出目前你在本班的朋友的名字_6	Stu_e_16_11_f
+rename	上学期你班是否有同学考试作弊1是2否	Stu_e_16_12
+rename	上周你班是否有同学和老师顶嘴1是2否	Stu_e_16_13
+rename	上周你班是否有同学在学校喝酒1是2否	Stu_e_16_14
+rename	上周你班是否有同学在学校抽烟1是2否	Stu_e_16_15
+rename	上周你班是否有同学逃课1是2否	Stu_e_16_16
+rename	上周你班是否有同学抄作业1是2否	Stu_e_16_17
+rename	上周你班是否有同学在学校打架1是2否	Stu_e_16_18
+rename	上周你班是否有同学勒索别人1是2否	Stu_e_16_19
+rename	上周你班是否有同学欺负同学1是2否	Stu_e_16_20
+rename	上周你班是否有同学在学校赌钱1是2否	Stu_e_16_21
+rename	上周你在学校抽了几次烟1从不3天2少	Stu_e_16_22
+rename	上周你在学校喝了几次酒1从不3天2少	Stu_e_16_23
+rename	你学校是不是封闭式管理1是2否	Stu_e_16_24
+rename	上周学校封闭期间你出了几次校门	Stu_e_16_25
+rename	上周你每天大概有多少时间在用电脑或者玩手机	Stu_e_16_26
+rename	其中上周你每天用电脑或手机娱乐例如玩游戏上微信看	Stu_e_16_27
+rename	上周你的老师有几次提醒你要控制用电脑或手机的时间	Stu_e_16_28
+rename	你学校是否有心理辅导老师1有2没有	Stu_e_16_29
+rename	你班是否有同学接受过心理辅导老师的咨询或辅导1有	Stu_e_16_30
+rename	你是否参加过职业技能大赛的备赛训练活动1是2否	Stu_e_16_31
+rename	你是否参加过职业技能大赛1是2否	Stu_e_16_32
+rename	A上课的时间	Stu_e_16_33_a
+rename	b课后学习和做家庭作业的时间	Stu_e_16_33_b
+rename	c睡眠时间	Stu_e_16_33_c
+rename	d其他如运动聚命	Stu_e_16_33_d
+rename	e无所事事地玩	Stu_e_16_33_e
+rename	上学期你的老师找你个人聊天有几次	Stu_e_16_34
+rename	你觉得你的老师关心你吗1很关心2关心3不关心	Stu_e_16_35
+rename	你的手机上存有你老师的电话号码吗1存了2没存	Stu_e_16_36
+rename	你如果在实习中遇到困难你觉得你会主动与你的老师联系吗	Stu_e_16_37
+rename	学校的老师或领导曾经跟你们班上同学讲过继续上学的重要性吗	Stu_e_16_38
+rename	学校的老师或领导曾经跟你本人讲过继续上学的重要性吗1	Stu_e_16_39
+rename	最近一学年你们班上有同学退学或者不读了吗1有2	Stu_e_16_40
+rename	你们班主任老师会努力劝说这些退学或要退学的同学继续上学吗	Stu_e_16_41
+rename	你从中职毕业后你估计你第一个月的薪水会是多少钱	Stu_e_16_42
+rename	假设你本死中职没毕业就出去工作你估计你班上同学中职毕业那	Stu_e_16_43
+rename	你估计河南其他和你同一年级的中职学生毕业后第一个月的薪水	Stu_e_16_44
+rename	假设河南其他和你同一年级的中职学生没毕业就出去工作待到同	Stu_e_16_45
+rename	如果你从中职毕业了你估计2026年10年后你一个月的	Stu_e_16_46
+rename	如果你没有从中职毕业你估计2026年10年后你一个月	Stu_e_16_47
+rename	你从中职毕业后你认为你在3个月之内能有多大的几率找到一份	Stu_e_16_48
+rename	你从中职毕业后你认为你在3个月之内能有多大的几率找到任何	Stu_e_16_49
+rename	假设你本人中职没毕业就去找工作待到你班上同学中职毕业那年	Stu_e_16_50
+rename	你是否打算从这所中职毕业1是2否	Stu_e_16_51
+rename	你离开中职之后的第一年打算干什么1找工作2上大专	Stu_e_16_52
+rename	你希望自己将来最高能够达到什么样的教育程度1初中毕业	Stu_e_16_53
+rename	你是否准备参加普通高考1是2否	Stu_e_16_54
+rename	你是否准备参加对口高考1是2否	Stu_e_16_55
+rename	你是否打算上高职高专1是12否	Stu_e_16_56
+rename	你父亲希望你达到的教育程度1初中毕业2高中毕业3	Stu_e_16_57
+rename	你母亲希望你达到的教育程度1初中韦业2高中毕业3	Stu_e_16_58
+rename	新的计划和想法有時候会让我无法专心于现有的计划1一点	Stu_e_16_59
+rename	挫折不会使我气馁1一点也不像2不像3有点像4	Stu_e_16_60
+rename	当我着迷在某件计划一阵子后会失去兴趣1一点也不像2	Stu_e_16_61
+rename	我是一个努力工作的人1一点也不像2不像3有点	Stu_e_16_62
+rename	我时常立下一个目标但一阵子过后又改追求別的目标1	Stu_e_16_63
+rename	我很难把我的注意力集中在一个要好几个月才能完成的计划上	Stu_e_16_64
+rename	无论什么事情我开了头就要完成它1一点也不像2不像	Stu_e_16_65
+rename	我很勤劳我不轻言放弃1一点也不像2不像3有	Stu_e_16_66
+rename	从2015年5月到现在你是否参加过任何实习1是2	Stu_e_16_67
+rename	你实习的单位在哪里1本县12本市非本县3本省	Stu_e_16_68
+rename	你主要通过什么渠道联系实习单位1本校安排2本人自	Stu_e_16_69
+rename	a其他说明	Stu_e_16_69detail
+rename	你实习单位的名称是什么1富士康2宇通客车3	Stu_e_16_70
+rename	CQ	Stu_e_16_70detail
+rename	实习单位在接受你实习前是否要求你出示学校同意文件或其他同	Stu_e_16_71
+rename	你是几年级开始实习的1你入学后第一学期2第一学期	Stu_e_16_72
+rename	你班级有几个人和你一起去这个实习单位	Stu_e_16_73
+rename	你所在的实习单位有多少员工	Stu_e_16_74
+rename	在前往实习之前是否有学校教师跟你说明实习的目的和内容	Stu_e_16_75
+rename	实习单位学校你本人是否签有三方协议1是2否	Stu_e_16_76
+rename	你手里是否保存有实习协议正本1是2否	Stu_e_16_77
+rename	实习期间学校或企业是否为你购买了意外伤害保险1是	Stu_e_16_78
+rename	你跟哪些部门缴纳了实习费1都没有2学校3实习	Stu_e_16_79
+rename	DA	Stu_e_16_79detail
+rename	你一共缴纳了多少实习费	Stu_e_16_80
+rename	进单位时你是否接受了关于实习要求与单位制度的培训1	Stu_e_16_81
+rename	你在实习期间所在的岗位是否与你在学校所学的专业对口	Stu_e_16_82
+rename	你主要是通过什么形式参与实习1学徒式2加工流水	Stu_e_16_83
+rename	DF	Stu_e_16_83detail
+rename	你在实习单位一共实习了几个星期	Stu_e_16_84
+rename	实习期间你一周工作几天	Stu_e_16_85
+rename	实习期间你平均一天工作几个小时	Stu_e_16_86
+rename	实习期间你是否曾一周工作超过40个小时1从来没有	Stu_e_16_87
+rename	实习期间你是否曾一天工作超过8小时1从来没有2	Stu_e_16_88
+rename	你在实习期间一共有多少工资	Stu_e_16_89
+rename	跟其他千一样工作的正式员工相比你的工资如何1较高	Stu_e_16_90
+rename	实习工资如何发给你1企业直接发给学生i2通过学校	Stu_e_16_91
+rename	DO	Stu_e_16_91detail
+rename	实习期间学校老师在实习单位驻场指导了几个星期	Stu_e_16_92
+rename	实习期间学校老师总共有几次询问过你实习的情况	Stu_e_16_93
+rename	实习期间学校老师是否与你的家长沟通过你实习的情况1	Stu_e_16_94
+rename	实习期间实习单位总共有几次安排培训活动给实习生	Stu_e_16_95
+rename	你会推荐跟你同专业的同学去你的实习单位进行实习吗1	Stu_e_16_96
+rename	老师很关注我的学习1每节课2大部分课3个别课	Stu_e_16_97
+rename	当我需要帮助时老师总是会给我一些额外的帮助1每节	Stu_e_16_98
+rename	老师总是在学习方面帮助我1每节课2大部分课3	Stu_e_16_99
+rename	老师会一直给我讲解直到我明白课堂内容1每节课2	Stu_e_16_100
+rename	老师在课堂上会给我表达观点的机会1每节课2大部	Stu_e_16_101
+rename	老师给我们制定了明确的学习目标1每节课2大部分课	Stu_e_16_102
+rename	老师会让我或者其他同学有充足的时间来表达我们的想法和思路	Stu_e_16_103
+rename	老师会依据同学们学习能力的高低布置不同的作业1每节	Stu_e_16_104
+rename	老师会布置需要至少一周才能完成的大作业1每节课2	Stu_e_16_105
+rename	老师会让我知道我在课上的学习情况1每节课2大部分	Stu_e_16_106
+rename	老师会提问我们以确认我们是否听懂了他她讲的内容	Stu_e_16_107
+rename	老师会让我们分成小组一起解题或完成一些任务1每节	Stu_e_16_108
+rename	在开始讲解一堂课的新内容之前老师会回顾上一堂课讲的内	Stu_e_16_109
+rename	老师会让我们帮他她设计课堂上的活动或内容1每	Stu_e_16_110
+rename	老师会让我知道我在数学方面的强项和弱项分别是什么1	Stu_e_16_111
+rename	每当有考试或作业时老师会告诉我们他她对我们的期望	Stu_e_16_112
+rename	老师会告诉我们必须要掌握哪些东西1每节课2大部	Stu_e_16_113
+rename	老师会告诉我如何才能提高我的数学能力1每节课2	Stu_e_16_114
+rename	老师会给我们布置数学练习题1每节课2大部分课	Stu_e_16_115
+rename	我们老师能够让同学们都集中注意力认真听讲1非常同	Stu_e_16_116
+rename	我们老师能够保持课堂井然有序1非常同意2同意	Stu_e_16_117
+rename	我们老师能够按时开始上课1非常同意2同意3	Stu_e_16_118
+rename	我们老师等了很久同学们才开始安静下来听讲1非常	Stu_e_16_119
+rename	在实际操作训练实训中我能够独立完成老师安排的实训任	Stu_e_16_120
+rename	在实训中我能在限定的时间内完成任务1非常符合2	Stu_e_16_121
+rename	在实际操作测试中老师对我的评价比较高1非常符合2	Stu_e_16_122
+rename	在实际操作中遇到问题我能够自行解决1非常符合2	Stu_e_16_123
+rename	我的动手能力比以前有了很大的进步1非常符合2比较	Stu_e_16_124
+rename	我能够根据老师的示例完成一个新的任务1非常符合2	Stu_e_16_125
+rename	我能把老师所教的知识运用在实际操作中1非常符合2	Stu_e_16_126
+rename	我能较好地完成老师布置的实践任务1非常符合2比较	Stu_e_16_127
+rename	我能灵活应变适应不同的环境或胜任不同的工作1非常符	Stu_e_16_128
+rename	这学期老师曾经就你的学习进度跟你单独谈话1一周	Stu_e_16_129
+rename	这学期老师曾经就你的学习进度跟你家长单独谈话1	Stu_e_16_130
+rename	这学期老师曾经就你的学习进度给家里发家长信1一	Stu_e_16_131
+rename	这学期老师曾经告诉你考好很重要1一周一次或更多	Stu_e_16_132
+rename	上周你是否上过数学课1上过2没上过	Stu_e_16_133
+rename	上周数学老师布置了几次数学作业	Stu_e_16_134
+rename	上周你交了几次数学作业	Stu_e_16_135
+rename	上周你完成数学课的作业平均每天花了多少时间0老师	Stu_e_16_136
+rename	上周数学老师批改了几次你交的数学作业	Stu_e_16_137
+rename	上周数学老师在课堂上提问过你几次	Stu_e_16_138
+rename	上周数学老师给你单独辅导几次	Stu_e_16_139
+rename	上周除了数学老师你接受几次数学辅导次	Stu_e_16_140
+rename	上周你缺过几节数学课0没缺过1节2两节3	Stu_e_16_141
+rename	上周专业课老师布置了几次专业课的作业	Stu_e_16_142
+rename	上周你交了几次专业课作业	Stu_e_16_143
+rename	上周你完成专业课的作业平均每天花了多少时间0老师	Stu_e_16_144
+rename	上周专业课老师批改了几次你交的专业课作业	Stu_e_16_145
+rename	上周专业课老师在课堂上提问过你几次	Stu_e_16_146
+rename	上周专业课老师给你单独辅导几次	Stu_e_16_147
+rename	上周除了专业课老师你接受几次专业辅导次	Stu_e_16_148
+rename	上周你缺过几节专业课0没缺过1一节2两节	Stu_e_16_149
+rename	父亲督促你学习功课1经常2有时3很少4几	Stu_e_16_150
+rename	母亲督促你学习功课1经常2有时3很少4几	Stu_e_16_151
+rename	父亲指导你制定学业计划1经常2有时3很少4	Stu_e_16_152
+rename	母亲指导你制定学业计划1经常2有时3很少4	Stu_e_16_153
+rename	父亲与你交流未来发展规划1经常2有时3很少	Stu_e_16_154
+rename	母亲与你交流未来发展规划1经常2有时3很少	Stu_e_16_155
+rename	父亲关心你的学校生活情况1经常2有时3很少	Stu_e_16_156
+rename	母亲关心你的学校生活情况1经常2有时3很少	Stu_e_16_157
+rename	父亲与你交流学习的事情1经常2有时3很少4	Stu_e_16_158
+rename	母亲与你交流学习的事情1经常2有时3很少4	Stu_e_16_159
+rename	与父亲交流过程你感觉很偷快1经常2有时3很	Stu_e_16_160
+rename	与母亲交流过程你感觉很愉快1经常2有时3很	Stu_e_16_161
+rename	GH	stu_e_16_stest_g2_stuid
+rename	GI	stu_e_16_stest_g2_schname
+rename	班级_年	stu_e_16_stest_g2_classyear
+rename	班级_班	stu_e_16_stest_g2_class
+rename	专业名称	stu_e_16_stest_g2_majorname 
+rename	GM	stu_e_16_stest_g2_stuname
+rename	GN	stu_e_16_stest_g2_surveydate
+rename	GO	stu_e_16_stest_g2_1
+rename	GP	stu_e_16_stest_g2_2
+rename	GQ	stu_e_16_stest_g2_3
+rename	GR	stu_e_16_stest_g2_4
+rename	GS	stu_e_16_stest_g2_5
+rename	GT	stu_e_16_stest_g2_6
+rename	GU	stu_e_16_stest_g2_7
+rename	GV	stu_e_16_stest_g2_8
+rename	GW	stu_e_16_stest_g2_9
+rename	GX	stu_e_16_stest_g2_10
+rename	GY	stu_e_16_stest_g2_11
+rename	GZ	stu_e_16_stest_g2_12
+rename	HA	stu_e_16_stest_g2_13
+rename	HB	stu_e_16_stest_g2_14
+rename	HC	stu_e_16_stest_g2_15
+rename	HD	stu_e_16_stest_g2_16
+rename	HE	stu_e_16_stest_g2_17
+rename	HF	stu_e_16_stest_g2_18
+rename	HG	stu_e_16_stest_g2_19
+rename	HH	stu_e_16_stest_g2_20
+rename	HI	stu_e_16_stest_g2_21
+rename	HJ	stu_e_16_stest_g2_22
+rename	HK	stu_e_16_stest_g2_23
+rename	HL	stu_e_16_stest_g2_24
+rename	HM	stu_e_16_stest_g2_25
+rename	HN	stu_e_16_stest_g2_26
+rename	HO	stu_e_16_stest_g2_27
+rename	HP	stu_e_16_stest_g2_28
+rename	HQ	stu_e_16_stest_g2_29
+rename	HR	stu_e_16_stest_g2_30
+rename	HS	stu_e_16_stest_g2_31
+rename	HT	stu_e_16_stest_g2_32
+rename	HU	stu_e_16_stest_g2_33
+rename	HV	stu_e_16_stest_g2_34
+rename	HW	stu_e_16_stest_g2_35
+rename	HX	stu_e_16_stest_g2_36
+rename	HY	stu_e_16_stest_g2_37
+rename	HZ	stu_e_16_stest_g2_38
+rename	IA	stu_e_16_stest_g2_39
+rename	_问卷编码	stu_e_16_mtest_g2_stuid
+rename	IC	stu_e_16_mtest_g2_schname
+rename	ID	stu_e_16_mtest_g2_classyear
+rename	IE	stu_e_16_mtest_g2_class
+rename	IF	stu_e_16_mtest_g2_majorname
+rename	IG	stu_e_16_mtest_g2_stuname
+rename	IH	stu_e_16_mtest_g2_surveydate
+rename	_1	stu_e_16_mtest_g2_1_1
+rename	_2	stu_e_16_mtest_g2_1_2
+rename	_3	stu_e_16_mtest_g2_1_3
+rename	_4	stu_e_16_mtest_g2_1_4
+rename	IM	stu_e_16_mtest_g2_2_1
+rename	IN	stu_e_16_mtest_g2_2_2
+rename	IO	stu_e_16_mtest_g2_3
+rename	IP	stu_e_16_mtest_g2_4
+rename	IQ	stu_e_16_mtest_g2_5
+rename	IR	stu_e_16_mtest_g2_6
+rename	IS	stu_e_16_mtest_g2_7
+rename	IT	stu_e_16_mtest_g2_8
+rename	IU	stu_e_16_mtest_g2_9
+rename	IV	stu_e_16_mtest_g2_10
+rename	IW	stu_e_16_mtest_g2_11
+rename	IX	stu_e_16_mtest_g2_12
+rename	IY	stu_e_16_mtest_g2_13
+rename	IZ	stu_e_16_mtest_g2_14
+rename	JA	stu_e_16_mtest_g2_15
+rename	JB	stu_e_16_mtest_g2_16
+rename	JC	stu_e_16_mtest_g2_17
+rename	JD	stu_e_16_mtest_g2_18
+rename	JE	stu_e_16_mtest_g2_19
+rename	JF	stu_e_16_mtest_g2_20
+rename	JG	stu_e_16_mtest_g2_21
+rename	JH	stu_e_16_mtest_g2_22
+rename	JI	stu_e_16_mtest_g2_23
+rename	JJ	stu_e_16_mtest_g2_24
+rename	JK	stu_e_16_mtest_g2_25
+rename	JL	stu_e_16_mtest_g2_26
+rename	JM	stu_e_16_mtest_g2_27
+rename	JN	stu_e_16_mtest_g2_28
+rename	JO	stu_e_16_mtest_g2_29
+rename	JP	stu_e_16_mtest_g2_30
+rename	JQ	stu_e_16_mtest_g2_31
+rename	JR	stu_e_16_mtest_g2_32
+rename	JS	stu_e_16_mtest_g2_33
+rename	JT	stu_e_16_mtest_g2_34
+rename	JU	stu_e_16_mtest_g2_35
+rename	图像名称	stu_e_16_mtest_g2_image
+
+tostring Stu_e_16_79detail,replace
+save   "$dtadir\Henan_VET_2016_stu_shukong_raw.dta",replace
+
+//两个数据合并
+append using "$dtadir\Henan_VET_2016_stu_comp_raw.dta"
+
+//生成专业变量
+gen major = 1 if stu_e_16_ctest_g2_majorname != "" 
+replace major = 2 if stu_e_16_stest_g2_majorname != ""
+label var major "1=计算机,2=数控"
+label define A 1 "计算机" 2 "数控"
+label values major A
+
+//处理异常值-学生调查问卷
+tab Stu_e_16_2 //你妈妈的手机号码是多少？异常值：不知道。
+replace Stu_e_16_2="" if Stu_e_16_2=="不知道" 
+
+tab Stu_e_16_3 //你爸爸的手机号码是多少？异常值：不知道  无。
+replace Stu_e_16_3="" if Stu_e_16_3=="不知道" 
+replace Stu_e_16_3="" if Stu_e_16_3=="无" 
+
+tab Stu_e_16_4 //您的微信号码是多少？异常值：不知道  无。
+replace Stu_e_16_4="" if Stu_e_16_4=="不知道" 
+replace Stu_e_16_4="0" if Stu_e_16_4=="无" 
+
+tab Stu_e_16_5 //您的QQ号码是多少？异常值：不知道  无。
+replace Stu_e_16_5="" if Stu_e_16_5=="不知道" 
+replace Stu_e_16_5="0" if Stu_e_16_5=="无" 
+
+
+tab Stu_e_16_6 //你是否加入了你班级的QQ群? 1=是 2=否 3=本班没有QQ群。异常值： 53972113，2个， 819891304，1个
+replace Stu_e_16_6 = "1" if Stu_e_16_6 =="53972113"
+replace Stu_e_16_6 = "" if Stu_e_16_6 =="819891304"
+
+tab Stu_e_16_16 //上周, 你班是否有同学逃课? 1=是 2=否 异常值：3,1个
+replace Stu_e_16_16 = "" if Stu_e_16_16 =="3"
+
+tab Stu_e_16_24 //你学校是不是封闭式管理? 1=是 2=否 异常值：0,1个
+replace Stu_e_16_24 = "" if Stu_e_16_24 =="0"
+
+tab Stu_e_16_26 //上周,你每天大概有多少时间在用电脑或者玩手机?异常值：50,24,22,21,20
+replace Stu_e_16_26 = "" if Stu_e_16_26 =="50"
+replace Stu_e_16_26 = "" if Stu_e_16_26 =="24"
+replace Stu_e_16_26 = "" if Stu_e_16_26 =="22"
+replace Stu_e_16_26 = "" if Stu_e_16_26 =="21"
+replace Stu_e_16_26 = "" if Stu_e_16_26 =="20"
+
+tab Stu_e_16_27 //上周,你每天大概有多少时间在用电脑或者玩手机?异常值：50,24,22,21,20
+replace Stu_e_16_27 = "" if Stu_e_16_27 =="50"
+replace Stu_e_16_27 = "" if Stu_e_16_27 =="24"
+replace Stu_e_16_27 = "" if Stu_e_16_27 =="21"
+replace Stu_e_16_27 = "" if Stu_e_16_27 =="20"
+
+tab Stu_e_16_28 // 上周,你的老师有几次提醒你要控制用电 脑或手机的时间?异常值：好几
+replace Stu_e_16_28 = "" if Stu_e_16_28=="好几"
+
+
+
+tab Stu_e_16_29 //你学校是否有心理辅导老师? 1=有 2=没有，异常值：0,7个
+replace Stu_e_16_29 = "" if Stu_e_16_29 =="0"
+
+tab Stu_e_16_30 //你班是否有同学接受过心理辅导老师的咨 询或辅导? 1=有 2=没有，异常值：0,8个
+replace Stu_e_16_30 = "" if Stu_e_16_30 =="0"
+
+tab Stu_e_16_31 //你是否参加过职业技能大赛的备赛训练活 动? 1=是 2·否，异常值：0,3个
+replace Stu_e_16_31 = "" if Stu_e_16_31 =="0"
+
+tab Stu_e_16_32 //你是否参加过职业技能大赛? 1=是 2=否,异常值：0,3个
+replace Stu_e_16_32 = "" if Stu_e_16_32 =="0"
+
+tab Stu_e_16_33_a // 上课的时间，异常值：5、6
+replace Stu_e_16_33_a = "5.6" if Stu_e_16_33_a=="5、6"
+
+
+
+tab Stu_e_16_36 //你的手机上存有你老师的电话号码 吗? 1=存了 2=没存,异常值：3,5，“3，没手机”
+replace Stu_e_16_36 = "" if Stu_e_16_36 =="3"
+replace Stu_e_16_36 = "" if Stu_e_16_36 =="5"
+replace Stu_e_16_36 = "" if Stu_e_16_36 =="3,没手机"
+
+
+tab Stu_e_16_37 //你如果在实习中遇到困难,你觉得你会主动与你的老师联系吗? 异常值：3,7
+replace Stu_e_16_37 = "" if Stu_e_16_37 =="3"
+replace Stu_e_16_37 = "" if Stu_e_16_37 =="7"
+
+tab Stu_e_16_38 //学校的老师或领导曾经跟你们班上同学讲过继续上学的重要性吗? 1=从来没有 3=有时候 2=偶尔有 4=经常，异常值：5
+replace Stu_e_16_38 = "" if Stu_e_16_38 =="5"
+
+tab Stu_e_16_57 //你父亲希望你达到的教育程度 1=初中毕业 2=高中毕业 3=专科韦业 4=本科毕业 5=研宄生毕业(包括硕士和博士）,异常值：0，1个，单亲，1个
+replace Stu_e_16_57 = "" if Stu_e_16_57 =="0"
+replace Stu_e_16_57 = "" if Stu_e_16_57 =="单亲"
+
+tab Stu_e_16_58 //你母亲希望你达到的教育程度 1=初中韦业 2=高中毕业 3=专科韦业 4=本科毕业 5=研究生毕业(包括硕士和博士）,异常值，0,1个，没有母亲，1个
+replace Stu_e_16_58 = "" if Stu_e_16_58 =="0"
+replace Stu_e_16_58 = "" if Stu_e_16_58 =="没有母亲"
+
+tab Stu_e_16_69 //你主要通过什么渠道联系实习单位? 异常值：1,3 1,6 1,7 1,8 2,7 2,8 3,7 3,8 5,7 6,7
+replace Stu_e_16_69="" if Stu_e_16_69=="1,3"|Stu_e_16_69=="1,6"|Stu_e_16_69=="1,7"|Stu_e_16_69=="1,8"|Stu_e_16_69=="2,7"|Stu_e_16_69=="2,8"|Stu_e_16_69=="3,7"|Stu_e_16_69=="3,8"|Stu_e_16_69=="5,7"|Stu_e_16_69=="6,7"
+
+tab Stu_e_16_71 //实习单位在接受你实习前是否要求你 出示学校同意文件或其他同意证明? 1=是 2=否,异常值，4,1个
+replace Stu_e_16_71 = "" if Stu_e_16_71 =="4"
+
+tab Stu_e_16_72 //你是几年级开始实习的? 1=你入学后第一学期 2=第一学期之后 3=第二学期之后 4=第三学期之后 5=第四学期之后,异常值，0,1个
+replace Stu_e_16_72 = "" if Stu_e_16_72 =="0"
+
+tab Stu_e_16_73 //你班级有几个人和你一起去这个实习单位? 异常值：无
+replace Stu_e_16_73="0" if Stu_e_16_73=="无"
+
+
+tab Stu_e_16_78 //实习期间,学校或企业是否为你购买了意外伤害保险? 1=是 2=否,异常值：备注:不清楚，1个
+replace Stu_e_16_78 = "" if Stu_e_16_78 =="备注:不清楚"
+
+tab Stu_e_16_80 //你一共缴纳了多少实习费？异常值：不知道 银行卡直接扣掉
+replace Stu_e_16_80="" if Stu_e_16_80=="不知道 银行卡直接扣掉"
+
+tab Stu_e_16_83 //你主要是通过什么形式参与实习? 1=学徒式； 2=加工流水线式;3=其他请在答案列说明。异常值：不记得，1个
+replace Stu_e_16_83 = "" if Stu_e_16_83 =="不记得"
+
+tab Stu_e_16_89 //你在实习期间一共有多少工资？异常值：1+   3
+replace Stu_e_16_89="" if Stu_e_16_89=="1+"
+replace Stu_e_16_89="" if Stu_e_16_89=="3"
+
+tab Stu_e_16_91 //实习工资如何发给你? 1=企业直接发给学生i 2=通过学校发给学生 3=不知道； 4=其他  异常值：1,4
+replace Stu_e_16_91="" if Stu_e_16_91=="1,4"
+
+tab Stu_e_16_94 //实习期间,学校老师是否与你的家长 沟通过你实习的情况? 1=是 2=否,异常值：0,50个
+replace Stu_e_16_94 = "" if Stu_e_16_94 =="0"
+
+tab Stu_e_16_96 //你会推荐跟你同专业的同学去你的实 习单位进行实习吗? 1=会2=不会，异常值，0,2个
+replace Stu_e_16_96 = "" if Stu_e_16_96 =="0"
+
+tab Stu_e_16_133 //上周,你是否上过数学课? 1=上过 2=没上过,异常值：10,1个，6，1个
+replace Stu_e_16_133 = "1" if Stu_e_16_133 =="10"
+replace Stu_e_16_133 = "1" if Stu_e_16_133 =="6"
+
+tab Stu_e_16_134 // 上周,数学老师布置了几次数学作业? 异常值：太多了,记不清
+replace Stu_e_16_134="" if Stu_e_16_134=="太多了,记不清"
+
+tab Stu_e_16_135 // 上周,你交了几次数学作业? 异常值：太多了,记不清
+replace Stu_e_16_135="" if Stu_e_16_135=="太多了,记不清"
+
+tab Stu_e_16_137 // 上周,数学老师批改了几次你交的数学作业? 异常值：??
+replace Stu_e_16_137="" if Stu_e_16_137=="??"
+
+tab Stu_e_16_142 //上周,专业课老师布置了几次专业课的作业? 异常值：0,半月请假  太多了
+replace Stu_e_16_142 ="0" if Stu_e_16_142 =="0,半月请假"
+replace Stu_e_16_142 ="" if Stu_e_16_142 =="太多了"
+
+tab Stu_e_16_143 //上周,你交了几次专业课作业? 异常值：0,半月请假  太多了
+replace Stu_e_16_143 ="0" if Stu_e_16_143 =="0,半月请假"
+replace Stu_e_16_143 ="" if Stu_e_16_143 =="太多了"
+
+tab Stu_e_16_144 //上周,你完成专业课的作业平均每天花了多少时间? 0=老师没有给我布置作业 1=1-15分钟 2=16-30 分钟 3=31-60分钟 4=60分钟以上，异常值：0,半月请假   4,(没写完) 
+replace Stu_e_16_144 = "0" if Stu_e_16_144 =="0,半月请假"
+replace Stu_e_16_144 = "" if Stu_e_16_144 =="4,(没写完)"
+
+tab Stu_e_16_145 //上周,专业课老师批改了几次你交的专业课作业? 异常值：0,半月请假  太多了
+replace Stu_e_16_145 ="0" if Stu_e_16_145 =="0,半月请假"
+replace Stu_e_16_145 ="" if Stu_e_16_145 =="太多了"
+
+tab Stu_e_16_146 //上周,专业课老师在课堂上提问过你几次? 异常值：0,半月请假  
+replace Stu_e_16_146 ="0" if Stu_e_16_146 =="0,半月请假"
+
+tab Stu_e_16_147 //上周,专业课老师给你单独辅导几次? 异常值：0,半月请假  
+replace Stu_e_16_147 ="0" if Stu_e_16_147 =="0,半月请假"
+
+tab Stu_e_16_148 //上周,除了专业课老师,你接受几次专业辅导次 异常值：0,半月请假  
+replace Stu_e_16_148 ="0" if Stu_e_16_148 =="0,半月请假"
+
+
+
+//按照问卷的逻辑关系清理变量-跳题
+
+replace Stu_e_16_41 ="" if Stu_e_16_40 =="2" //学生卷40题
+
+replace Stu_e_16_67="1" if Stu_e_16_stuid=="5600120129" //学生卷67题
+replace Stu_e_16_67="2" if Stu_e_16_stuid=="5100210103"
+replace Stu_e_16_67="1" if Stu_e_16_stuid=="54301201134"
+replace Stu_e_16_67="1" if Stu_e_16_stuid=="5430120114"
+replace Stu_e_16_67="1" if Stu_e_16_stuid=="5430120117"
+replace Stu_e_16_67="1" if Stu_e_16_stuid=="5460120111"
+replace Stu_e_16_67="1" if Stu_e_16_stuid=="5400320141"
+replace Stu_e_16_67="1" if Stu_e_16_stuid=="55801201105"
+replace Stu_e_16_67="1" if Stu_e_16_stuid=="5130110131"
+replace Stu_e_16_67="1" if Stu_e_16_stuid=="5340110112"
+replace Stu_e_16_67="1" if Stu_e_16_stuid=="5140210101"
+replace Stu_e_16_67="1" if Stu_e_16_stuid=="54501101101"
+replace Stu_e_16_67="2" if Stu_e_16_stuid=="5600120127"
+replace Stu_e_16_67="2" if Stu_e_16_stuid=="5310220112"
+replace Stu_e_16_67="2" if Stu_e_16_stuid=="5150310130"
+
+replace Stu_e_16_133="1" if Stu_e_16_stuid=="5600120104" //学生卷133题
+replace Stu_e_16_133="1" if Stu_e_16_stuid=="5600120105"
+replace Stu_e_16_133="1" if Stu_e_16_stuid=="54009201103"
+replace Stu_e_16_133="1" if Stu_e_16_stuid=="5400920118"
+replace Stu_e_16_133="1" if Stu_e_16_stuid=="5420120104"
+replace Stu_e_16_133="1" if Stu_e_16_stuid=="5570220129"
+replace Stu_e_16_133="1" if Stu_e_16_stuid=="5310220116"
+replace Stu_e_16_133="1" if Stu_e_16_stuid=="5310220125"
+replace Stu_e_16_133="1" if Stu_e_16_stuid=="54101101117"
+replace Stu_e_16_133="1" if Stu_e_16_stuid=="55702101104"|Stu_e_16_stuid=="5570210133"|Stu_e_16_stuid=="5130410112"|Stu_e_16_stuid=="5130110125"|Stu_e_16_stuid=="5130110130"|Stu_e_16_stuid=="5130310125"|Stu_e_16_stuid=="5130310102"
+replace Stu_e_16_133="2" if Stu_e_16_stuid=="5600120129"
+
+
+//字符型改成数值型-学生表
+destring Stu_e_16_1 Stu_e_16_2 Stu_e_16_3 Stu_e_16_6,replace
+destring  Stu_e_16_8 Stu_e_16_9 Stu_e_16_10 Stu_e_16_12 Stu_e_16_13 Stu_e_16_14 Stu_e_16_15 Stu_e_16_16 Stu_e_16_17 Stu_e_16_18 Stu_e_16_19 Stu_e_16_20 Stu_e_16_21 Stu_e_16_22 Stu_e_16_23 Stu_e_16_24 Stu_e_16_25 Stu_e_16_26 Stu_e_16_27 Stu_e_16_28 Stu_e_16_29 Stu_e_16_30 Stu_e_16_31 Stu_e_16_32 Stu_e_16_33_a Stu_e_16_33_b Stu_e_16_33_c Stu_e_16_33_d Stu_e_16_33_e,replace
+destring Stu_e_16_34 Stu_e_16_35 Stu_e_16_36 Stu_e_16_37 Stu_e_16_38 Stu_e_16_39 Stu_e_16_40 Stu_e_16_41,replace
+destring Stu_e_16_48 Stu_e_16_49 Stu_e_16_50,replace
+destring Stu_e_16_51 Stu_e_16_52 Stu_e_16_53 Stu_e_16_54 Stu_e_16_55 Stu_e_16_56 Stu_e_16_57 Stu_e_16_58,replace
+destring Stu_e_16_59 Stu_e_16_60 Stu_e_16_61 Stu_e_16_62 Stu_e_16_63 Stu_e_16_64 Stu_e_16_65 Stu_e_16_66,replace
+destring Stu_e_16_67 Stu_e_16_68 Stu_e_16_69 Stu_e_16_70 Stu_e_16_71 Stu_e_16_72 Stu_e_16_73 Stu_e_16_75 Stu_e_16_76 Stu_e_16_77 Stu_e_16_78 Stu_e_16_80 Stu_e_16_81 Stu_e_16_82 Stu_e_16_83 Stu_e_16_84 Stu_e_16_85 Stu_e_16_86 Stu_e_16_87 Stu_e_16_88 Stu_e_16_89 Stu_e_16_90 Stu_e_16_91 Stu_e_16_92 Stu_e_16_93 Stu_e_16_94 Stu_e_16_95 Stu_e_16_96,replace
+destring Stu_e_16_97 Stu_e_16_98 Stu_e_16_99 Stu_e_16_100 Stu_e_16_101 Stu_e_16_102 Stu_e_16_103 Stu_e_16_104 Stu_e_16_105 Stu_e_16_106 Stu_e_16_107 Stu_e_16_108 Stu_e_16_109 Stu_e_16_110 Stu_e_16_111 Stu_e_16_112 Stu_e_16_113 Stu_e_16_114 Stu_e_16_115 Stu_e_16_116 Stu_e_16_117 Stu_e_16_118 Stu_e_16_119 Stu_e_16_120 Stu_e_16_121 Stu_e_16_122 Stu_e_16_123 Stu_e_16_124 Stu_e_16_125 Stu_e_16_126 Stu_e_16_127 Stu_e_16_128,replace
+destring Stu_e_16_129 Stu_e_16_130 Stu_e_16_131 Stu_e_16_132,replace
+destring Stu_e_16_133 Stu_e_16_134 Stu_e_16_135 Stu_e_16_136 Stu_e_16_137 Stu_e_16_138 Stu_e_16_139 Stu_e_16_140 Stu_e_16_141,replace
+destring Stu_e_16_142 Stu_e_16_143 Stu_e_16_144 Stu_e_16_145 Stu_e_16_146 Stu_e_16_147 Stu_e_16_148 Stu_e_16_149,replace
+destring Stu_e_16_150 Stu_e_16_151 Stu_e_16_152 Stu_e_16_153 Stu_e_16_154 Stu_e_16_155 Stu_e_16_156 Stu_e_16_157 Stu_e_16_158 Stu_e_16_159 Stu_e_16_160 Stu_e_16_161,replace
+
+
+
+//改标签
+label define B 1 "是" 2 "否" 3 "本班没有QQ群"
+label values Stu_e_16_6 B
+
+label define C 1 "比以前好很多" 2 "比以前好一点" 3 "没有变化" 4 "比以前差一点" 5 "比以前差很多"
+label values Stu_e_16_8 C
+
+label define D 1 "比以前好很多" 2 "比以前好一点" 3 "没有变化" 4 "比以前差一点" 5 "比以前差很多"
+label values Stu_e_16_9 D
+
+label define E 1 "非常满意" 2 "比较满意" 3 "比较不满意" 4 "非常不满意"
+label values Stu_e_16_10 E
+
+label define F 1 "是" 2 "否" 
+label values Stu_e_16_12 Stu_e_16_13 Stu_e_16_14 Stu_e_16_15 Stu_e_16_16 Stu_e_16_17 Stu_e_16_18 Stu_e_16_19 Stu_e_16_20 Stu_e_16_21 Stu_e_16_24 Stu_e_16_31 Stu_e_16_32 Stu_e_16_51 Stu_e_16_54 Stu_e_16_55 Stu_e_16_56 Stu_e_16_67 Stu_e_16_71 Stu_e_16_75 Stu_e_16_76 Stu_e_16_77 Stu_e_16_78 Stu_e_16_81 Stu_e_16_94 F
+
+label define G 1 "从不" 2 "少于一天一次" 3 "一天一次" 4 "一天多次"
+label values Stu_e_16_22 Stu_e_16_23 G
+
+label define H 1 "有" 2 "没有" 
+label values Stu_e_16_29 Stu_e_16_30 Stu_e_16_40 Stu_e_16_12 H
+
+label define I 1 "很关心" 2 "关心" 3 "不关心" 4 "很不关心"
+label values Stu_e_16_35 I
+
+label define J 1 "存了" 2 "没存"
+label values Stu_e_16_36 J
+
+label define K 1 "会" 2 "不会"
+label values Stu_e_16_37 Stu_e_16_96 K
+
+label define L 1 "从来没有" 2 "偶尔有" 3 "有时候"   4 "经常"
+label values Stu_e_16_38 Stu_e_16_39 Stu_e_16_41 Stu_e_16_87 Stu_e_16_88 L
+
+label define M 1 "找工作" 2 "上大专、高职" 3 "上本科"   4 "自己创业" 5 "没想好"
+label values Stu_e_16_52  M
+
+label define N 1 "初中毕业" 2 "高中毕业" 3 "专科毕业"   4 "本科毕业" 5 "研究生毕业（包括硕士和博士）"
+label values Stu_e_16_53 Stu_e_16_57 Stu_e_16_58  N
+
+label define O 1 "一点也不像" 2 "不像" 3 "有点像"   4 "大多数像" 5 "完全像"
+label values Stu_e_16_59 Stu_e_16_60 Stu_e_16_61 Stu_e_16_62 Stu_e_16_63 Stu_e_16_64 Stu_e_16_65 Stu_e_16_66 O
+
+label define P 1 "本县" 2 "本市非本县" 3 "本省非本市"   4 "外省"
+label values Stu_e_16_68 P
+
+label define Q 1 "富士康" 2 "宇通客车" 3 "中国移动"   4 "贝塔斯曼" 5 "河南奔马集团" 6 "其他"
+label values Stu_e_16_70 Q
+
+label define R 1 "你入学后第一学期" 2 "第一学期之后" 3 "第二学期之后"   4 "第三学期之后" 5 "第四学期之后" 
+label values Stu_e_16_72 R
+
+label define S 1 "对口" 2 "不对口" 
+label values Stu_e_16_82 S
+
+label define T 1 "学徒式" 2 "加工流水线式" 3 "其他"   
+label values Stu_e_16_83 T
+
+label define U 1 "较高" 2 "差不多" 3 "较低"   4 "没有工资"
+label values Stu_e_16_90 U
+
+label define V 1 "每节课" 2 "大部分课" 3 "个别课"   4 "从来没有"
+label values Stu_e_16_97 Stu_e_16_98 Stu_e_16_99 Stu_e_16_100 Stu_e_16_101 Stu_e_16_102 Stu_e_16_103 Stu_e_16_104 Stu_e_16_105 Stu_e_16_106 Stu_e_16_107 Stu_e_16_108 Stu_e_16_109 Stu_e_16_110 Stu_e_16_111 Stu_e_16_112 Stu_e_16_113 Stu_e_16_114 Stu_e_16_115 V
+
+label define W 1 "非常同意" 2 "同意" 3 "不同意"   4 "非常不同意"
+label values Stu_e_16_116 Stu_e_16_117 Stu_e_16_118 Stu_e_16_119 W
+
+label define X 1 "非常符合" 2 "比较符合" 3 "不太符合"   4 "不符合"
+label values Stu_e_16_120 Stu_e_16_121 Stu_e_16_122 Stu_e_16_123 Stu_e_16_124 Stu_e_16_125 Stu_e_16_126 Stu_e_16_127 Stu_e_16_128 X
+
+label define Y 1 "一周一次或更多" 2 "一个月一次或更多" 3 "一学期一次或更多"   4 "从来没有"
+label values Stu_e_16_129 Stu_e_16_130 Stu_e_16_131 Stu_e_16_132 Y
+
+label define Z 1 "上过" 2 "没上过" 
+label values Stu_e_16_133 Z
+
+label define a 0 "老师没有给我布置作业" 1 "1-15分钟" 2 "16-30分钟" 3 "31-60分钟"   4 "60分钟以上"
+label values Stu_e_16_136 Stu_e_16_144 a
+
+
+label define b 0 "没缺过" 1 "一节" 2 "两节" 3 "三节"   4 "四节及以上"
+label values Stu_e_16_141 Stu_e_16_149 b
+
+label define c 1 "经常" 2 "有时" 3 "很少"   4 "几乎没有"
+label values Stu_e_16_150 Stu_e_16_151 Stu_e_16_152 Stu_e_16_153 Stu_e_16_154 Stu_e_16_155 Stu_e_16_156 Stu_e_16_157 Stu_e_16_158 Stu_e_16_159 Stu_e_16_160 Stu_e_16_161 c
+
+//处理多选题-79题
+gen Stu_e_16_79_new=Stu_e_16_79
+generate Stu_e_16_79_1 = regexm(Stu_e_16_79_new, "1") 
+generate Stu_e_16_79_2 = regexm(Stu_e_16_79_new, "2")  
+generate Stu_e_16_79_3 = regexm(Stu_e_16_79_new, "3")
+generate Stu_e_16_79_4 = regexm(Stu_e_16_79_new, "4")
+drop Stu_e_16_79_new
+order Stu_e_16_79 Stu_e_16_79_*,a(Stu_e_16_78) 
+
+foreach var of varlist Stu_e_16_79_* {
+	replace	`var' = . if Stu_e_16_79 == ""
+	}
+label	var	Stu_e_16_79_1 "都没有"					
+label	var	Stu_e_16_79_2 "学校"
+label	var	Stu_e_16_79_3 "实习单位"
+label	var	Stu_e_16_79_4 "其他"
+
+label define d 1 "都没有" 2 "学校" 3 "实习单位" 4 "其他"
+label values Stu_e_16_79_1 d
+
+label define e 1 "学校" 
+label values Stu_e_16_79_2 e
+
+label define f 1 "实习单位" 
+label values Stu_e_16_79_3 f
+
+label define g 1 "其他"
+label values Stu_e_16_79_4 g
+
+
+
+
+
+
+
+
+
