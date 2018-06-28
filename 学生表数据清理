@@ -9,7 +9,7 @@ save   "$dtadir\Henan_VET_2016_stu_shukong_raw.dta",replace
 //变量命名-计算机
 use "$dtadir\Henan_VET_2016_stu_comp_raw.dta",clear
 rename	调查员编码	Stu_e_16_surveyercode
-rename	问卷编码	Stu_e_16_stuid
+rename	问卷编码	Stu_e_16_schid
 rename	学校名称	Stu_e_16_schname
 rename	姓名	Stu_e_16_stuname
 rename	性别	Stu_e_16_gender
@@ -197,7 +197,7 @@ rename	父亲与你交流学习的事情1经常2有时3很少4	Stu_e_16_158
 rename	母亲与你交流学习的事情1经常2有时3很少4	Stu_e_16_159
 rename	与父亲交流过程你感觉很偷快1经常2有时3很	Stu_e_16_160
 rename	与母亲交流过程你感觉很愉快1经常2有时3很	Stu_e_16_161
-rename	GH	stu_e_16_ctest_g2_stuid
+rename	GH	stu_e_16_ctest_g2_schid
 rename	GI	stu_e_16_ctest_g2_schname
 rename	班级_年	stu_e_16_ctest_g2_classyear
 rename	班级_班	stu_e_16_ctest_g2_class
@@ -261,7 +261,7 @@ rename	IP	stu_e_16_ctest_g2_54
 rename	IQ	stu_e_16_ctest_g2_55
 rename	IR	stu_e_16_ctest_g2_56
 rename	IS	stu_e_16_ctest_g2_57
-rename	_问卷编码	stu_e_16_mtest_g2_stuid
+rename	_问卷编码	stu_e_16_mtest_g2_schid
 rename	IU	stu_e_16_mtest_g2_schname
 rename	IV	stu_e_16_mtest_g2_classyear
 rename	IW	stu_e_16_mtest_g2_class
@@ -316,7 +316,7 @@ save   "$dtadir\Henan_VET_2016_stu_comp_raw.dta",replace
 //变量命名-数控
 use "$dtadir\Henan_VET_2016_stu_shukong_raw.dta",clear
 rename	调查员编码	Stu_e_16_surveyercode
-rename	问卷编码	Stu_e_16_stuid
+rename	问卷编码	Stu_e_16_schid
 rename	学校名称	Stu_e_16_schname
 rename	姓名	Stu_e_16_stuname
 rename	性别	Stu_e_16_gender
@@ -504,7 +504,7 @@ rename	父亲与你交流学习的事情1经常2有时3很少4	Stu_e_16_158
 rename	母亲与你交流学习的事情1经常2有时3很少4	Stu_e_16_159
 rename	与父亲交流过程你感觉很偷快1经常2有时3很	Stu_e_16_160
 rename	与母亲交流过程你感觉很愉快1经常2有时3很	Stu_e_16_161
-rename	GH	stu_e_16_stest_g2_stuid
+rename	GH	stu_e_16_stest_g2_schid
 rename	GI	stu_e_16_stest_g2_schname
 rename	班级_年	stu_e_16_stest_g2_classyear
 rename	班级_班	stu_e_16_stest_g2_class
@@ -550,7 +550,7 @@ rename	HX	stu_e_16_stest_g2_36
 rename	HY	stu_e_16_stest_g2_37
 rename	HZ	stu_e_16_stest_g2_38
 rename	IA	stu_e_16_stest_g2_39
-rename	_问卷编码	stu_e_16_mtest_g2_stuid
+rename	_问卷编码	stu_e_16_mtest_g2_schid
 rename	IC	stu_e_16_mtest_g2_schname
 rename	ID	stu_e_16_mtest_g2_classyear
 rename	IE	stu_e_16_mtest_g2_class
@@ -773,33 +773,33 @@ replace Stu_e_16_148 ="0" if Stu_e_16_148 =="0,半月请假"
 
 replace Stu_e_16_41 ="" if Stu_e_16_40 =="2" //学生卷40题
 
-replace Stu_e_16_67="1" if Stu_e_16_stuid=="5600120129" //学生卷67题
-replace Stu_e_16_67="2" if Stu_e_16_stuid=="5100210103"
-replace Stu_e_16_67="1" if Stu_e_16_stuid=="54301201134"
-replace Stu_e_16_67="1" if Stu_e_16_stuid=="5430120114"
-replace Stu_e_16_67="1" if Stu_e_16_stuid=="5430120117"
-replace Stu_e_16_67="1" if Stu_e_16_stuid=="5460120111"
-replace Stu_e_16_67="1" if Stu_e_16_stuid=="5400320141"
-replace Stu_e_16_67="1" if Stu_e_16_stuid=="55801201105"
-replace Stu_e_16_67="1" if Stu_e_16_stuid=="5130110131"
-replace Stu_e_16_67="1" if Stu_e_16_stuid=="5340110112"
-replace Stu_e_16_67="1" if Stu_e_16_stuid=="5140210101"
-replace Stu_e_16_67="1" if Stu_e_16_stuid=="54501101101"
-replace Stu_e_16_67="2" if Stu_e_16_stuid=="5600120127"
-replace Stu_e_16_67="2" if Stu_e_16_stuid=="5310220112"
-replace Stu_e_16_67="2" if Stu_e_16_stuid=="5150310130"
+replace Stu_e_16_67="1" if Stu_e_16_schid=="5600120129" //学生卷67题
+replace Stu_e_16_67="2" if Stu_e_16_schid=="5100210103"
+replace Stu_e_16_67="1" if Stu_e_16_schid=="54301201134"
+replace Stu_e_16_67="1" if Stu_e_16_schid=="5430120114"
+replace Stu_e_16_67="1" if Stu_e_16_schid=="5430120117"
+replace Stu_e_16_67="1" if Stu_e_16_schid=="5460120111"
+replace Stu_e_16_67="1" if Stu_e_16_schid=="5400320141"
+replace Stu_e_16_67="1" if Stu_e_16_schid=="55801201105"
+replace Stu_e_16_67="1" if Stu_e_16_schid=="5130110131"
+replace Stu_e_16_67="1" if Stu_e_16_schid=="5340110112"
+replace Stu_e_16_67="1" if Stu_e_16_schid=="5140210101"
+replace Stu_e_16_67="1" if Stu_e_16_schid=="54501101101"
+replace Stu_e_16_67="2" if Stu_e_16_schid=="5600120127"
+replace Stu_e_16_67="2" if Stu_e_16_schid=="5310220112"
+replace Stu_e_16_67="2" if Stu_e_16_schid=="5150310130"
 
-replace Stu_e_16_133="1" if Stu_e_16_stuid=="5600120104" //学生卷133题
-replace Stu_e_16_133="1" if Stu_e_16_stuid=="5600120105"
-replace Stu_e_16_133="1" if Stu_e_16_stuid=="54009201103"
-replace Stu_e_16_133="1" if Stu_e_16_stuid=="5400920118"
-replace Stu_e_16_133="1" if Stu_e_16_stuid=="5420120104"
-replace Stu_e_16_133="1" if Stu_e_16_stuid=="5570220129"
-replace Stu_e_16_133="1" if Stu_e_16_stuid=="5310220116"
-replace Stu_e_16_133="1" if Stu_e_16_stuid=="5310220125"
-replace Stu_e_16_133="1" if Stu_e_16_stuid=="54101101117"
-replace Stu_e_16_133="1" if Stu_e_16_stuid=="55702101104"|Stu_e_16_stuid=="5570210133"|Stu_e_16_stuid=="5130410112"|Stu_e_16_stuid=="5130110125"|Stu_e_16_stuid=="5130110130"|Stu_e_16_stuid=="5130310125"|Stu_e_16_stuid=="5130310102"
-replace Stu_e_16_133="2" if Stu_e_16_stuid=="5600120129"
+replace Stu_e_16_133="1" if Stu_e_16_schid=="5600120104" //学生卷133题
+replace Stu_e_16_133="1" if Stu_e_16_schid=="5600120105"
+replace Stu_e_16_133="1" if Stu_e_16_schid=="54009201103"
+replace Stu_e_16_133="1" if Stu_e_16_schid=="5400920118"
+replace Stu_e_16_133="1" if Stu_e_16_schid=="5420120104"
+replace Stu_e_16_133="1" if Stu_e_16_schid=="5570220129"
+replace Stu_e_16_133="1" if Stu_e_16_schid=="5310220116"
+replace Stu_e_16_133="1" if Stu_e_16_schid=="5310220125"
+replace Stu_e_16_133="1" if Stu_e_16_schid=="54101101117"
+replace Stu_e_16_133="1" if Stu_e_16_schid=="55702101104"|Stu_e_16_schid=="5570210133"|Stu_e_16_schid=="5130410112"|Stu_e_16_schid=="5130110125"|Stu_e_16_schid=="5130110130"|Stu_e_16_schid=="5130310125"|Stu_e_16_schid=="5130310102"
+replace Stu_e_16_133="2" if Stu_e_16_schid=="5600120129"
 
 
 //字符型改成数值型-学生表
